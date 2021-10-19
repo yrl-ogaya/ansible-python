@@ -1,0 +1,13 @@
+---
+- name: Python & Ansible Lab Pre-Setup
+  hosts: localhost
+  vars:
+    hostlist: "{{ lookup('file', '/home/centos/hosts').splitlines() }}"
+  tasks:
+  - name: Adding Ansible Host /etc/hosts
+    lineinfile: 
+      path: /etc/hosts
+      line: "{{ item }}"
+      state: present
+    with_items:
+      - "{{ hostlist }}"
