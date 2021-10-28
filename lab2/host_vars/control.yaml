@@ -1,3 +1,5 @@
----
-packages: [httpd,chrony,php]
-users: [student1,student2,student3,student4]
+cider: 24
+dns: 8.8.8.8
+gateway: 172.25.2.254
+hostanme: control
+ip: 172.25.2.1

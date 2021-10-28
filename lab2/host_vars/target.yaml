@@ -1,3 +1,5 @@
----
-packages: ["mariadb","mariadb-server"]
-
+cider: null
+dns: null
+gateway: null
+hostanme: null
+ip: null
