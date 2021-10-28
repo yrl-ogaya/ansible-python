@@ -3,3 +3,4 @@
 et-xmlfile
 openpyxl
 pyyaml
+rich

@@ -3,3 +3,7 @@ dns: 8.8.8.8
 gateway: 172.25.2.254
 hostanme: control
 ip: 172.25.2.1
+packa:
+- httpd
+- php
+- chrony
