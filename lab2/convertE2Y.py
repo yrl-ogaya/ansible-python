@@ -1,3 +1,4 @@
+# import 宣言
 import openpyxl
 import yaml
 import logging
@@ -6,18 +7,26 @@ from rich.logging import RichHandler
 
 # ストリームハンドラの設定とファイルハンドラの設定
 rich_handler: RichHandler = RichHandler(rich_tracebacks=True)
-rich_handler.setLevel(logging.INFO)
-rich_handler.setFormatter(logging.Formatter("%(message)s"))
-logging.basicConfig(level=logging.INFO, handlers=[rich_handler])
+rich_handler.setFormatter(logging.Formatter("%(asctime)s:%(lineno)d:%(levelname)s:%(message)s"))
 
-# Logger名の指定。
+# ファイルハンドラの設定
+logfile = logging.FileHandler('converte2y.log')
+logfile.setFormatter(logging.Formatter("%(asctime)s:%(lineno)d:%(levelname)s:%(message)s"))
+
+# ログレベルの設定とハンドラの関連づけ
+logging.basicConfig(level=logging.DEBUG, handlers=[rich_handler,logfile])
+
+# Logger名の指定
 logger = logging.getLogger(__name__)
+logger.info("=== Convert start ===")
 
 # Excel ファイルを指定する
 wbook = openpyxl.load_workbook("AnsiblePythonLab.xlsx")
+#logger.debug()
 
 # Excel ファイルのシートリストを取得する
-sheets = wbook.sheetnames
+sheets = wbook.get_sheet_names()
+logger.debug("SheetList :"+ str(sheets))
 
 # sheet の枚数分繰り返す
 for sheet in sheets:
