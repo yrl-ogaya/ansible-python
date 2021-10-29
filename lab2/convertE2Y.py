@@ -50,7 +50,7 @@ for sheet in sheets:
               'cider': cider.value,
               'gateway': gateway.value,
               'dns': dns.value,
-              'packa': packages
+              'packages': packages
              }
   
   # 各シートの情報を yaml に変換して出力
