@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort, make_response ,request
+from flask import Flask, make_response ,request
 import subprocess
 from waitress import serve
 
@@ -6,7 +6,7 @@ from waitress import serve
 #ver2
 api = Flask(__name__)
 
-@api.route('/Users/test', methods=['GET'])
+@api.route('/', methods=['GET'])
 def get():
     search = request.args.get("search")
     #email = request.form.get("search")
@@ -17,11 +17,8 @@ def get():
             "user":"test"
             }
         }
-    subprocess.call("dir")
-    return make_response(jsonify(result))
-@api.errorhandler(404)
-def not_found(error):
-    return make_response(jsonify({'error': 'Not found'}), 404)
+    subprocess.call("dir",shell=True)
+    return make_response('アクセス完了')
 
 if __name__ == '__main__':
     serve(api, host='0.0.0.0', port=3000)
