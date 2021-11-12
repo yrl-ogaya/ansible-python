@@ -1,3 +1,3 @@
 import subprocess
 
-subprocess.run(["python","./Sample.py"],shell=True)
+subprocess.run(["python3","./Sample.py"],shell=True)
