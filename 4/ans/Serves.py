@@ -11,7 +11,7 @@ api = Flask(__name__)
 def create():
     print('/createにアクセスがありました。')
     ip = request.args.get('ip')
-    subprocess.run(['python3 Convert.py '+ip],shell=True)
+    subprocess.run(['python3','Convert.py',ip],shell=True)
     print('yamlファイルが生成しました。')
     return make_response('yamlファイルを作成しました。\n')
 
