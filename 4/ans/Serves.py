@@ -19,7 +19,7 @@ def create():
 @api.route('/ansible', methods=['GET'])
 def ansible():
     print('/ansibleにアクセスがありました。')
-    #subprocess.run(['ansible','convert.py'],shell=True)
+    subprocess.run(['ansible-playbook main.yaml'],shell=True)
     print('ansibleを実行しました。')
     return make_response('ansibleを実行しました。\n')
 
