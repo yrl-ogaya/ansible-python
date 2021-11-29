@@ -1,0 +1,25 @@
+cider: 24
+dns: 172.25.0.2
+firewalls:
+- http
+- https
+gateway: 172.25.2.1
+hostanme: control
+ip: 172.25.2.119
+packages:
+- httpd
+- php
+- chrony
+services:
+- httpd
+- chrony
+users:
+- student1
+- student2
+- student3
+- student4
+users_comment:
+- "\u30ED\u30FC\u30AB\u30EB\u30E6\u30FC\u30B6"
+- "\u30ED\u30FC\u30AB\u30EB\u30E6\u30FC\u30B6"
+- "\u30ED\u30FC\u30AB\u30EB\u30E6\u30FC\u30B6"
+- "\u30ED\u30FC\u30AB\u30EB\u30E6\u30FC\u30B6"
