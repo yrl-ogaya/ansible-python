@@ -1,0 +1,31 @@
+---
+- name: Ansible-Python Lab2
+  hosts: labs
+  tasks:
+    # Pakage Install
+    - name: Install Package
+      yum:
+        name: "{{ packages }}"
+        state: latest
+    # Local User setting
+    - name: local user adding
+      user: 
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - "{{ users }}"
+      when: users is defined
+
+    # cloud instance hostname setting
+    - name: cloud instance hostname preserve
+      lineinfile:
+        path: /etc/cloud/cloud.cfg
+        line: "preserve_hostname: true"
+        
+#    - debug:
+#        msg: "{{ dummy }}"
+#    - name: Dev Test Code.
+#      debug:
+#        msg: "{{ item }}"
+#      with_items:
+#        - "{{ dummy }}"
