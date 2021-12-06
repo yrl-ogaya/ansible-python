@@ -1,4 +1,3 @@
-#test
 def function():
      print("function")
  
