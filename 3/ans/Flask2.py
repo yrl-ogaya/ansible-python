@@ -7,7 +7,7 @@ api = Flask(__name__)
 def function():
     date = request.args.get('date')
     print(date)
-    return make_response('success\n')
+    return make_response('success')
  
 if __name__ == '__main__':
     serve(api, host='0.0.0.0', port=3000)
