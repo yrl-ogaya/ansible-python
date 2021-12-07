@@ -18,7 +18,7 @@ def get():
             }
         }
     subprocess.call("dir",shell=True)
-    return make_response('アクセス完了')
+    return make_response('success')
 
 if __name__ == '__main__':
     serve(api, host='0.0.0.0', port=3000)

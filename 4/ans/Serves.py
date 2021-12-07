@@ -12,7 +12,7 @@ def create():
     print('/createにアクセスがありました。')
     subprocess.run(['python3 Convert.py '],shell=True)
     print('yamlファイルが生成しました。')
-    return make_response('yamlファイルを作成しました。\n')
+    return make_response('success\n')
 
 #ansibleの実行
 @api.route('/ansible', methods=['GET'])

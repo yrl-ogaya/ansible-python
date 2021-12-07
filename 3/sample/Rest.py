@@ -6,7 +6,7 @@ api = Flask(__name__)
 @api.route('/', methods=['GET'])
 def get():
       print('アクセスがありました。')
-      return make_response('処理が正常に実行されました。')
+      return make_response('success')
 
 
 if __name__ == '__main__':
