@@ -37,7 +37,6 @@
       lineinfile:
         path: /etc/cloud/cloud.cfg
         line: "preserve_hostname: true"
-        
     # Host Name Setting
     - name: Host Name Setting
       hostname:

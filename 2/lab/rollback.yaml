@@ -1,0 +1,40 @@
+---
+- name: Ansible-Python Lab2
+  hosts: labs
+  tasks:
+    - name: Remove Package
+      yum:
+        name: "{{ packages }}"
+        state: absent
+    # Local User setting
+    - name: local user Deleteing
+      user:
+        name: "{{ item.name }}"
+        state: absent
+      with_items:
+        - "{{ users }}"
+      when: users is defined
+    # FireWall Setting
+    - name: Remove FireWall Settings
+      firewalld:
+        service: "{{ item }}"
+        permanent: yes
+        state: disabled
+      with_items:
+        - "{{ firewalls }}"
+    # Firewalld Service Restart
+    - name: restart firewalld
+      systemd:
+        state: restarted
+        name: firewalld 
+
+    # cloud instance hostname setting
+    - name: cloud instance hostname preserve
+      lineinfile:
+        path: /etc/cloud/cloud.cfg
+        line: "preserve_hostname: true"
+        state: absent
+
+#    - debug:
+#        msg: "{{ dummy }}"
+  

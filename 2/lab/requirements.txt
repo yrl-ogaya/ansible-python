@@ -1,0 +1,6 @@
+###### Requirements without Version Specifiers ######`
+###### pip3 install -r requirements.txt        ######`
+et-xmlfile
+openpyxl
+pyyaml
+rich

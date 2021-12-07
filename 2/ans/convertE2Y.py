@@ -9,12 +9,12 @@ from rich.logging import RichHandler
 rich_handler: RichHandler = RichHandler(rich_tracebacks=True)
 rich_handler.setFormatter(logging.Formatter("%(asctime)s:%(lineno)d:%(levelname)s:%(message)s"))
 
-  # ファイルハンドラの設定
+# ファイルハンドラの設定
 logfile = logging.FileHandler('converte2y.log')
 logfile.setFormatter(logging.Formatter("%(asctime)s:%(lineno)d:%(levelname)s:%(message)s"))
   
 # ログレベルの設定とハンドラの関連づけ
-logging.basicConfig(level=logging.DEBUG, handlers=[rich_handler,logfile])
+logging.basicConfig(level=logging.INFO, handlers=[rich_handler,logfile])
 
 # Logger名の指定
 logger = logging.getLogger(__name__)
@@ -33,7 +33,8 @@ def main():
   for sheetname in sheets:
     
     logger.info("-- Processing : " + sheetname + " sheet --")
-    sheet = wbook[sheetname] # 処理するシートの取得
+    # 処理するシートの取得
+    sheet = wbook[sheetname]
     hostname = sheet["C6"]
     ip = sheet["C7"]
     cider = sheet["C8"]
@@ -49,11 +50,16 @@ def main():
     firewalls = getList(sheet,row_no=30,col_no=3,max_row_no=35)
     # 追加ユーザリストの取得
     users = getList(sheet,row_no=40,col_no=2,max_row_no=47)
-     # 追加ユーザリストのコメント取得
+    # 追加ユーザリストのコメント取得
     users_comment = getList(sheet,row_no=40,col_no=3,max_row_no=47)
-    
+    # yaml 変換用複合ユーザリストの作成
+    users_list = list()
+    for (user,comment) in zip(users,users_comment):
+      user_tmp = {'name': user,'comment': comment}
+      users_list.append(user_tmp)
+ 
     # yaml 出力データの整形
-    out_data = {'hostanme': hostname.value,
+    out_data = {'hostname': hostname.value,
                 'ip': ip.value,
                 'cider': cider.value,
                 'gateway': gateway.value,
@@ -61,37 +67,30 @@ def main():
                 'packages': packages,
                 'services': services,
                 'firewalls': firewalls,
-                'users': users,
-                'users_comment': users_comment
+                'users': users_list
                }
 
     # 出力ファイルの指定
     yaml_output = open("host_vars/"+ sheetname + ".yaml", 'w') 
 
+    # YAML へ変換
+    yout = yaml.dump(out_data)
+    
     # 各シートの情報を yaml に変換して出力
-    yaml_output.write(yaml.dump(out_data))
+    yaml_output.write(yout)
     yaml_output.close()
 
     # yaml出力内容の出力
-    logger.debug("hostname: " + str(hostname.value))
-    logger.debug("ip : " + str(ip.value))
-    logger.debug("cider: " + str(cider.value))
-    logger.debug("gateway: " + str(gateway.value))
-    logger.debug("dns: " + str(dns.value))
-    logger.debug("packages: " + str(packages))
-    logger.debug("services: " + str(services))
-    logger.debug("firewalls: " + str(firewalls))
-    logger.debug("users: " + str(users))
-    logger.debug("users_comment: " + str(users_comment))
+    logger.debug(yout)
 
   # man() 正常終了
   return 0
 
-# Excel シートからリストで取得
+# シートリストの取得関数
 def getList(sheet,row_no,col_no,max_row_no):
   convlist = list()
 
-  # 起動/有効化サービスリストの処理
+  # シートリストの処理
   while row_no < max_row_no:
       cell_value = sheet.cell(row=row_no,column=col_no).value
       if cell_value == None:
@@ -99,9 +98,10 @@ def getList(sheet,row_no,col_no,max_row_no):
           continue
       convlist.append(cell_value)
       row_no = row_no + 1
-  #logger.info("convlist: " + str(convlist))
+  
   return convlist
-
+  
+# call main Function
 if __name__ == '__main__':
     logger.info('START MAIN PROCESS')
     main() 
