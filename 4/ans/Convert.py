@@ -2,7 +2,6 @@
 import openpyxl
 import yaml
 import sys
-from rich.logging import RichHandler
 
 # main 
 def main():
@@ -33,7 +32,12 @@ def main():
     users = getList(sheet,row_no=29,col_no=1,max_row_no=36)
      # 追加ユーザリストのコメント取得
     users_comment = getList(sheet,row_no=29,col_no=2,max_row_no=36)
-    
+    # yaml 変換用複合ユーザリストの作成
+    users_list = list()
+    for (user,comment) in zip(users,users_comment):
+      user_tmp = {'name': user,'comment': comment}
+      users_list.append(user_tmp)
+
     # yaml 出力データの整形
     out_data = {'hostanme': hostname.value,
                 'ip': ip.value,
@@ -43,25 +47,27 @@ def main():
                 'packages': packages,
                 'services': services,
                 'firewalls': firewalls,
-                'users': users,
                 'users_comment': users_comment
                }
 
     # 出力ファイルの指定
     yaml_output = open("host_vars/"+ sheetname + ".yaml", 'w') 
 
+      # YAML へ変換
+    yout = yaml.dump(out_data)
+    
     # 各シートの情報を yaml に変換して出力
-    yaml_output.write(yaml.dump(out_data))
+    yaml_output.write(yout)
     yaml_output.close()
 
   # man() 正常終了
   return 0
 
-# Excel シートからリストで取得
+# シートリストの取得関数
 def getList(sheet,row_no,col_no,max_row_no):
   convlist = list()
 
-  # 起動/有効化サービスリストの処理
+  # シートリストの処理
   while row_no < max_row_no:
       cell_value = sheet.cell(row=row_no,column=col_no).value
       if cell_value == None:
@@ -69,7 +75,7 @@ def getList(sheet,row_no,col_no,max_row_no):
           continue
       convlist.append(cell_value)
       row_no = row_no + 1
-  #logger.info("convlist: " + str(convlist))
+
   return convlist
 
 if __name__ == '__main__':

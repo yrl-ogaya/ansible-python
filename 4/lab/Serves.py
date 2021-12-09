@@ -1,13 +1,12 @@
-#4-1で作成したプログラムを実行してください
+#4-1で作成したプログラムの実行
+def create():
+    subprocess.run(['python3 Convert.py '],shell=True)
+
 
 #ansibleの実行
 @api.route('/ansible', methods=['GET'])
 def ansible():
     print('/ansibleにアクセスがありました。')
-    #subprocessを使いansibleを実行してください。
-
+    subprocess.run(['ansible-playbook main.yaml'],shell=True)
     print('ansibleを実行しました。')
     return make_response('ansibleを実行しました。')
-
-if __name__ == '__main__':
-    serve(api, host='0.0.0.0', port=3000)

@@ -10,7 +10,5 @@ packages:
 - mariadb
 services:
 - mariadb
-users:
-- dbadmin
 users_comment:
 - DBAdminUser
