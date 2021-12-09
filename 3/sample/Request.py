@@ -6,8 +6,8 @@ api = Flask(__name__)
 @api.route('/', methods=['GET'])
 def get():
     name = request.args.get('name')
-    print(name+'からアクセスがありました。')
-    return make_response('アクセス完了')
+    print(name)
+    return make_response('success')
 
 if __name__ == '__main__':
     serve(api, host='0.0.0.0', port=3000)
