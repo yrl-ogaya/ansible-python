@@ -13,6 +13,8 @@ packages:
 services:
 - httpd
 - chrony
-users_comment:
-- WebAdminUser
-- ContentUPLoadUser
+users:
+- comment: WebAdminUser
+  name: webadmin
+- comment: ContentUPLoadUser
+  name: upadmin

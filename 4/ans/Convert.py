@@ -47,7 +47,7 @@ def main():
                 'packages': packages,
                 'services': services,
                 'firewalls': firewalls,
-                'users_comment': users_comment
+                'users': users_list
                }
 
     # 出力ファイルの指定
