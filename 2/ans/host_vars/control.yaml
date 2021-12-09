@@ -1,12 +1,12 @@
-cider: 24
-dns: 172.25.0.2
+cider: xx
+dns: xxx.xxx.xxx.xxx
 firewalls:
 - http
 - https
 - ntp
-gateway: 172.25.2.1
+gateway: xxx.xxx.xxx.xxx
 hostname: control
-ip: 172.25.2.118
+ip: xxx.xxx.xxx.xxx
 packages:
 - httpd
 - php

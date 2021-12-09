@@ -1,11 +1,11 @@
-cider: 'cat '
-dns: 172.25.0.2
+cider: xx
+dns: xxx.xxx.xxx.xxx
 firewalls:
 - mysql
 - ntp
-gateway: 172.25.2.1
+gateway: xxx.xxx.xxx.xxx
 hostname: target
-ip: 172.25.2.42
+ip: xxx.xxx.xxx.xxx
 packages:
 - mariadb
 services:

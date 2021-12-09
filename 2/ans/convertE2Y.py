@@ -14,7 +14,7 @@ logfile = logging.FileHandler('converte2y.log')
 logfile.setFormatter(logging.Formatter("%(asctime)s:%(lineno)d:%(levelname)s:%(message)s"))
   
 # ログレベルの設定とハンドラの関連づけ
-logging.basicConfig(level=logging.INFO, handlers=[rich_handler,logfile])
+logging.basicConfig(level=logging.DEBUG, handlers=[rich_handler,logfile])
 
 # Logger名の指定
 logger = logging.getLogger(__name__)
