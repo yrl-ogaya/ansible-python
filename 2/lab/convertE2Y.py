@@ -47,3 +47,6 @@
   # シートリストの処理
 
 # call main Function
+if __name__ == '__main__':
+    logger.info('START MAIN PROCESS')
+    main() 
