@@ -14,7 +14,5 @@ services:
 - httpd
 - chrony
 users_comment:
-- "\u30ED\u30FC\u30AB\u30EB\u30E6\u30FC\u30B6"
-- "\u30ED\u30FC\u30AB\u30EB\u30E6\u30FC\u30B6"
-- "\u30ED\u30FC\u30AB\u30EB\u30E6\u30FC\u30B6"
-- "\u30ED\u30FC\u30AB\u30EB\u30E6\u30FC\u30B6"
+- WebAdminUser
+- ContentUPLoadUser
